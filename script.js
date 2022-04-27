@@ -15,6 +15,15 @@ function createCustomElement(element, className, innerText) {
 function createProductItemElement({ sku, name, image }) {
   const section = document.createElement('section');
   section.className = 'item';
+  // const resposta = fetchProducts('computador');
+  // const { results } = resposta;
+ 
+
+  data.results.forEach((prod) => {
+    const div = document.createElement('div');
+    div.innerText = prod;
+    section.appendChild(div);
+  });
 
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
@@ -40,4 +49,5 @@ function createCartItemElement({ sku, name, salePrice }) {
   return li;
 }
 
-window.onload = () => { };
+window.onload = () => {
+};
