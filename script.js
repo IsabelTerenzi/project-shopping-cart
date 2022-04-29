@@ -1,8 +1,3 @@
-function addEventos() {
-  const add = document.querySelectorAll('.item__add');
-  add.forEach((botao) => botao.addEventListener('click', cartItemClickListener));
-}
-
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -42,8 +37,14 @@ async function cartItemClickListener(event) {
   name: resultadosItem.title,
   salePrice: resultadosItem.price,
 };
+// eslint-disable-next-line no-use-before-define
 const criaItem = createCartItemElement(cadaItem);
   lista.appendChild(criaItem);
+}
+
+function addEventos() {
+  const add = document.querySelectorAll('.item__add');
+  add.forEach((botao) => botao.addEventListener('click', cartItemClickListener));
 }
 
 function createCartItemElement({ sku, name, salePrice }) {
