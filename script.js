@@ -19,6 +19,7 @@ function cartItemClickListener(event) {
   event.target.remove();
   const cartItems = document.querySelector('.cart__items').innerHTML;
   saveCartItems(cartItems);
+  getSavedCartItems(cartItems);
  }
 
  function createCartItemElement({ sku, name, salePrice }) {
