@@ -1,5 +1,5 @@
 const botaoEsvazia = document.querySelector('.empty-cart');
-const carrinho = document.querySelector('.cart__items');
+const cartItems = document.querySelector('.cart__items');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -17,9 +17,7 @@ function createCustomElement(element, className, innerText) {
  
 function cartItemClickListener(event) {
   event.target.remove();
-  const cartItems = document.querySelector('.cart__items').innerHTML;
-  saveCartItems(cartItems);
-  getSavedCartItems(cartItems);
+  saveCartItems(cartItems.innerHTML);
  }
 
  function createCartItemElement({ sku, name, salePrice }) {
@@ -39,7 +37,8 @@ function cartItemClickListener(event) {
   salePrice: resultadosItem.price,
 };
 const criaItem = createCartItemElement(cadaItem);
-carrinho.appendChild(criaItem);
+cartItems.appendChild(criaItem);
+saveCartItems(cartItems.innerHTML);
 }
 
 function createProductItemElement({ sku, name, image }) {
@@ -74,11 +73,10 @@ const chamaFetchProduct = async () => {
 };
 
   botaoEsvazia.addEventListener('click', () => {
-    carrinho.innerText = '';
+    cartItems.innerHTML = '';
     localStorage.clear();
+    saveCartItems(cartItems.innerHTML);
   });
-
-// const cart = document.querySelectorA('.cart__items');
 
 /* A função chamaFetchProduct vai buscar a section que contém os elementos com a classe items,
 vai chamar o resultado da FetchProducts já com o parâmetro 'computador', da categoria que queremos
@@ -91,4 +89,5 @@ criarElementos no elemento pai sessaoElementos, colocando os produtos na tela do
 
 window.onload = () => {
   chamaFetchProduct();
+  getSavedCartItems();
 };
