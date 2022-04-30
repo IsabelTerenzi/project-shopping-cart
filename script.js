@@ -14,11 +14,11 @@ function createCustomElement(element, className, innerText) {
   e.innerText = innerText;
   return e;
 }
-
-function cartItemClickListener(event) {
-  // pipipi popopo
- }
  
+function cartItemClickListener(event) {
+  event.target.remove();
+ }
+
  function createCartItemElement({ sku, name, salePrice }) {
    const li = document.createElement('li');
    li.className = 'cart__item';
@@ -30,7 +30,6 @@ function cartItemClickListener(event) {
  async function addAoCarrinho(event) {
   const produto = event.target.parentElement.querySelector('.item__sku').innerText;
   const resultadosItem = await fetchItem(produto);
-  console.log(resultadosItem);
   const cadaItem = { 
   sku: resultadosItem.id,
   name: resultadosItem.title,
@@ -71,7 +70,7 @@ const chamaFetchProduct = async () => {
   });
 };
 
-    botaoEsvazia.addEventListener('click', () => {
+  botaoEsvazia.addEventListener('click', () => {
     carrinho.innerText = '';
     localStorage.clear();
   });
