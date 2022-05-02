@@ -98,13 +98,13 @@ async function chamaFetchProducts() {
   });
 }
 
-function enquantoCarrega() {
+async function enquantoCarrega() {
   const sessaoElementos = document.querySelector('.items');
   const texto = document.createElement('p');
   texto.classList = 'loading';
   texto.innerText = 'carregando...';
   sessaoElementos.appendChild(texto);
-  chamaFetchProducts();
+  await chamaFetchProducts(); 
   texto.remove();
 }
 
