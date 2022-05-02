@@ -75,7 +75,6 @@ const chamaFetchProduct = async () => {
   botaoEsvazia.addEventListener('click', () => {
     cartItems.innerHTML = '';
     localStorage.clear();
-    saveCartItems(cartItems.innerHTML);
   });
 
 /* A função chamaFetchProduct vai buscar a section que contém os elementos com a classe items,
@@ -89,5 +88,7 @@ criarElementos no elemento pai sessaoElementos, colocando os produtos na tela do
 
 window.onload = () => {
   chamaFetchProduct();
-  getSavedCartItems();
+  cartItems.innerHTML = getSavedCartItems();
+  const itens = document.querySelectorAll('.cart__item');
+  itens.forEach((botao) => botao.addEventListener('click', cartItemClickListener));
 };
