@@ -1,5 +1,6 @@
 const botaoEsvazia = document.querySelector('.empty-cart');
 const cartItems = document.querySelector('.cart__items');
+const totalPrice = document.querySelector('.total-price');
 
 function createProductImageElement(imageSource) {
   const img = document.createElement('img');
@@ -18,6 +19,7 @@ function createCustomElement(element, className, innerText) {
  ele ser removido do carrinho. E também chama a saveCartItems, para que ao clicar no item para
  removê-lo, também o remove do local storage.
  */
+ 
 function cartItemClickListener(event) {
   event.target.remove();
   saveCartItems(cartItems.innerHTML);
@@ -33,7 +35,7 @@ function cartItemClickListener(event) {
 
  /* a função é chamada na createProductItemElement, recebendo um evento como parâmetro, que
  ao acionado, busca o elemento pai de onde foi clicado, ou seja, o id (sku), o title (name)
- e a thumbnail (image) de cada produto, buscando o innerText disso, aguardando a fetchItem,
+ e a thumbnail (image) de cada produto, buscando o innerHTML disso, aguardando a fetchItem,
  que vai fazer a requisição da API pelo id, e então para irá armazenar em uma constante apenas
  o id, o nome e o preço de cada produto, para adicionar ao carrinho. Então esse elemento será
  appendado para que apareçam no carrinho. Com a criação desses elementos, a função que salva
@@ -41,7 +43,7 @@ function cartItemClickListener(event) {
  */
 
  async function addAoCarrinho(event) {
-  const produto = event.target.parentElement.querySelector('.item__sku').innerText;
+  const produto = event.target.parentElement.querySelector('.item__sku').innerHTML;
   const resultadosItem = await fetchItem(produto);
   const cadaItem = { 
   sku: resultadosItem.id,
@@ -97,6 +99,13 @@ async function chamaFetchProducts() {
     sessaoElementos.appendChild(criarElementos);
   });
 }
+
+/* a função enquantoCarrega cria um texto que aparece na tela enquanto a requisição da API
+não é retornada. Para isso, ela pega o elemento pai, que é a sessão com a classe itens, então
+cria um parágrafo com o texto 'carregando...', então appenda esse texto para que ele apareça
+na tela. Depois ela espera o resultado da funçao chamaFetchProdutos, que chama a fetchProducts,
+que por sua vez, faz a requisição. E após isso, ela remove o texto, pois ele não é mais necessário.
+*/
 
 async function enquantoCarrega() {
   const sessaoElementos = document.querySelector('.items');
